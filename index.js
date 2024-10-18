@@ -39,6 +39,20 @@ function displayStoredQuotes(){
         removeButton.addEventListener("click",()=>{
             removeQuote(quoteObj);
         });
-        quoteItem.appendChild(removeButton)
+        quoteItem.appendChild(removeButton);
+        storedQuotesSection.appendChild(quoteItem);
+        
     })
 }  
+function removeQuote(quoteObj){
+    const storedQuotes =JSON.parse(localStorage.getItem("quotes"))||[];
+    const index = storedQuotes.indexOf(quoteObj);
+
+    if(index!==-1){
+        storedQuotes.splice(index, 1);
+        localStorage.setItem("quotes",JSON.stringify(storedQuotes));
+        displayStoredQuotes();
+    }
+
+}
+displayStoredQuotes();
